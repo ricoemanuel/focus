@@ -1,0 +1,47 @@
+
+mat-stepper{
+    max-width: 350px;
+   
+    border: 1px solid gray;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+  }
+  .Inicio{
+    color:#79d300;
+  }
+  .footer{
+    max-width: 350px;
+    margin: 0 auto;
+    border:1px solid gray;
+    text-align: center;
+    height: 50px;
+    padding-top: 15px;
+  }
+  button{
+    border-radius: 20px;
+    border: 1px #79d300 solid;
+    
+
+  }
+  button:hover{
+    box-shadow: 0px 0px 17px 2px #79d300;
+    border: 1px transparent solid;
+  }
+  .button{
+    width: fit-content;
+  }
+  ::ng-deep .mat-step-icon{
+    display: none;
+  }
+  ::ng-deep .mat-horizontal-stepper-header-container {
+    height: 20px !important;
+  }
+  .img-logo{
+    margin: 0 auto;
+    width: fit-content;
+    margin-top: 5%;
+  }

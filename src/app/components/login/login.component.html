@@ -1,0 +1,32 @@
+<div class="background">
+    <div class="img-logo">
+        <img  src="../../../assets/logo.png" width="300" alt="">
+      </div>
+    <mat-stepper [linear]="isLinear" #stepper class="mx-auto mat-stepper-hide-numbers" >
+      <mat-step [stepControl]="firstFormGroup" class="mx-auto">
+        
+        <form [formGroup]="firstFormGroup">
+          
+          <mat-form-field>
+            <mat-label>Correo</mat-label>
+            <input type="email" matInput placeholder="" formControlName="correo" required>
+          </mat-form-field><br>
+          <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput placeholder="" formControlName="contrasena" required>
+          </mat-form-field><br>
+         
+          <div class="mx-auto button">
+            <button mat-button  (click)="iniciarSesion()" >Iniciar sesión</button>
+          </div>
+        </form>
+      </mat-step>
+      
+      
+      
+    </mat-stepper>
+    <br>
+    <div class="footer">
+      ¿No tienes cuenta? <a href="/registrarse" class="Inicio">Registrate</a>
+    </div>
+    </div>

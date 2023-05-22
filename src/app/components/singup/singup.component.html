@@ -1,0 +1,64 @@
+<div class="background">
+  <div class="img-logo">
+    <img  src="../../../assets/logo.png" width="300" alt="">
+  </div>
+  
+<mat-stepper [linear]="isLinear" #stepper class="mx-auto">
+  
+  <mat-step [stepControl]="firstFormGroup" class="mx-auto">
+    
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Registro</ng-template>
+      <mat-form-field>
+        <mat-label>Correo</mat-label>
+        <input type="email" matInput placeholder="" formControlName="correo" required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput placeholder="" formControlName="contrasena" required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Confirmar Contraseña</mat-label>
+        <input type="password" matInput placeholder="" formControlName="confContrasena" required>
+      </mat-form-field>
+      <div class="mx-auto button">
+        <button mat-button   (click)="singup()">Registrarse</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Datos personales" class="mx-auto">
+    <form [formGroup]="secondFormGroup">
+      <mat-form-field>
+        <mat-label>Nombre:</mat-label>
+        <input matInput formControlName="firstName" placeholder="Ingresa tu nombre" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Apellido:</mat-label>
+        <input matInput formControlName="lastName" placeholder="Ingresa tu apellido" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fecha de nacimiento:</mat-label>
+        <input matInput [matDatepicker]="birthdatePicker" formControlName="birthdate" required>
+        <mat-datepicker-toggle matSuffix [for]="birthdatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #birthdatePicker></mat-datepicker>
+      </mat-form-field>
+      <div class="form-group form-check">
+        <mat-checkbox formControlName="termsChecked" >
+          He leído y aceptado los términos y condiciones
+        </mat-checkbox>
+      </div>
+      <br><br>
+      <div class="mx-auto button">
+        
+        <button mat-button   (click)="finalizar()">Finalizar</button>
+      </div>
+    </form>
+  </mat-step>
+  
+  
+</mat-stepper>
+<br>
+<div class="footer">
+  ¿Ya tienes cuenta? <a href="/inicio" class="Inicio">Inicia sesión</a>
+</div>
+</div>
