@@ -61,6 +61,7 @@ export class FirebaseService {
     const user = await this.getPersonaActiva();
     if (user) {
       post.autor = user['firstName'] + ' ' + user['lastName'];
+      post.document = 'document.pdf'
       const postId = collection(this.firestore, 'places');
       return addDoc(postId, post);
     } else {

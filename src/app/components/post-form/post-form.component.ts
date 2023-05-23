@@ -22,6 +22,7 @@ export class PostFormComponent {
   }
 
   cleanForm() {
+    this.post = { title: '', autor: '', description: '', document: '' };
     this.close.emit();
   }
 }
