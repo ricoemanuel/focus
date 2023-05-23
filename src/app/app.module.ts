@@ -25,6 +25,7 @@ import { TerminosCondicionesComponent } from './components/terminos-condiciones/
 import { HomeComponent } from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
 import { WallComponent } from './components/wall/wall.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { WallComponent } from './components/wall/wall.component';
     TerminosCondicionesComponent,
     HomeComponent,
     PostComponent,
-    WallComponent
+    WallComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
