@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Auth,signInWithEmailAndPassword,signOut,createUserWithEmailAndPassword, getAuth} from '@angular/fire/auth';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, collection, addDoc, collectionData, getDoc } from '@angular/fire/firestore';
+import { Post } from '../components/post/post.model';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,10 +27,51 @@ export class FirebaseService {
     let password=objeto["password"]
     return createUserWithEmailAndPassword(this.auth,email,password)
   }
+
   addPersona(usuario:any,id:string){
     usuario.estado=true;
     const usuarioRef=doc(this.firestore,"usuarios",id)
     return setDoc(usuarioRef,usuario)
   }
+
+  async getPersona(id: string) {
+    const usuarioRef = doc(this.firestore, "usuarios", id);
+    try {
+      const docSnap = await getDoc(usuarioRef);
+      if (docSnap.exists()) {
+        return docSnap.data();
+      } else {
+        console.log("User does not exist");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    return undefined;
+  }
+
+  async getPersonaActiva() {
+    const user = this.userObserver();
+    if (user != null) {
+      return this.getPersona(user.uid);
+    } 
+    return undefined;
+  }
+
+  async savePost(post: Post) {
+    const user = await this.getPersonaActiva();
+    if (user) {
+      post.autor = user['firstName'] + ' ' + user['lastName'];
+      const postId = collection(this.firestore, 'places');
+      return addDoc(postId, post);
+    } else {
+      throw new Error('No se pudo obtener el usuario activo.');
+    }
+  }
   
+  getPosts(): Observable<Post[]> {
+    
+    
+    const postId = collection(this.firestore, 'places');
+    return collectionData(postId, {idField: 'id'}) as Observable<Post[]>;
+  }
 }

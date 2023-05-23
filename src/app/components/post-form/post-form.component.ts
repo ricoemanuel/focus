@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Post } from '../post/post.model';
+import { FirebaseService } from '../../services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-form',
@@ -11,9 +13,12 @@ export class PostFormComponent {
   @Output() create: EventEmitter<Post> = new EventEmitter<Post>();
   @Output() close: EventEmitter<void> = new EventEmitter<void>();
 
-  createPost() {
-    // Aquí puedes agregar la lógica para crear el post, por ejemplo, enviar una solicitud HTTP al servidor
-    this.create.emit(this.post);
+  constructor(private firebaseService: FirebaseService, private router: Router) {}
+
+  async createPost() {
+    const response = await this.firebaseService.savePost(this.post);
+    this.router.navigate(['/home']);
+    //this.create.emit(this.post);
   }
 
   cleanForm() {
