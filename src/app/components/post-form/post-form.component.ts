@@ -14,10 +14,9 @@ export class PostFormComponent {
   createPost() {
     // Aquí puedes agregar la lógica para crear el post, por ejemplo, enviar una solicitud HTTP al servidor
     this.create.emit(this.post);
-    this.closePopup();
   }
 
-  closePopup() {
+  cleanForm() {
     this.close.emit();
   }
 }
