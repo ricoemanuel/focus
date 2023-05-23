@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <div class="popup">
     <div class="popup-content">
-      <h2>Publicar</h2>
+      <h1>Publicar</h1>
       <form (ngSubmit)="createPost()">
         <label for="title">Título:</label>
         <input type="text" id="title" name="title" [(ngModel)]="post.title" required>
@@ -12,8 +12,8 @@
         <label for="title">Documento:</label>
         <input type="file" id="document" name="document" [(ngModel)]="post.document" required>
         <br>
-        <button type="submit">Crear</button>
-        <button type="button" (click)="cleanForm()">Limpiar</button>
+        <button  class="btn" type="submit">Crear</button>
+        <button  class="btn" type="button" (click)="cleanForm()">Limpiar</button>
       </form>
     </div>
   </div>

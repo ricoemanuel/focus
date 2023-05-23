@@ -1,0 +1,55 @@
+h1{
+    text-align: center;
+    margin: 20px;
+    color: #79d300;
+}
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* <!--1️⃣ code CSS below --> */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
+
+.btn{
+margin: 8px;
+font-family: Roboto, sans-serif;
+font-weight: 200;
+font-size: 14px;
+color: #000000;
+background-color: #ffffff;
+padding: 10px 33px;
+border: solid #000000 1px;
+box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+border-radius: 8px;
+transition : 236ms;
+transform: translateY(0);
+display: flex;
+flex-direction: row;
+align-items: center;
+cursor: pointer;
+text-transform: lowercase;
+}
+
+.btn:hover{
+
+transition : 236ms;
+padding: 10px 38px;
+transform : translateY(-0px);
+background-color: #fff;
+color: #79d300;
+border: solid 1px #79d300;
+}
+input,textarea{
+    width: 100%;
+}
+
+
+
