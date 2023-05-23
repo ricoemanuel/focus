@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-singup',
@@ -23,7 +24,7 @@ export class SingupComponent {
   @ViewChild('stepper') stepper: MatStepper | undefined;
   isLinear = false;
   uid:string|undefined;
-  constructor(private _formBuilder: FormBuilder,private firebase: FirebaseService) {}
+  constructor(private _formBuilder: FormBuilder,private firebase: FirebaseService, private router: Router) {}
   async singup(){
     if(this.firstFormGroup.value.confContrasena==this.firstFormGroup.value.contrasena){
       let password=this.firstFormGroup.value.contrasena;
@@ -66,6 +67,7 @@ export class SingupComponent {
           showConfirmButton: false,
           timer: 1500
         })
+        this.router.navigate(['/inicio']);
       }).catch(()=>{
         Swal.fire({
           icon: 'error',
