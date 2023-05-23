@@ -1,0 +1,24 @@
+.post{
+    border: solid 1px;
+    margin-bottom: 12px;
+    padding: 24px;
+    margin: 8px 18px 20px 18px;
+    
+
+}
+
+.post h2{
+    color: #79d300;
+
+}
+
+.post_description_text{
+    text-align:justify;
+}
+.post p{
+    font-size: 14px;
+
+}
+.post_description{
+    font-size: 15px;
+}
