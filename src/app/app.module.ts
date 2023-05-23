@@ -20,6 +20,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MainComponent } from './components/main/main.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { MainComponent } from './components/main/main.component';
     AppComponent,
     LoginComponent,
     SingupComponent,
-    MainComponent
+    MainComponent,
+    ProfileComponent,
+    TerminosCondicionesComponent
   ],
   imports: [
     BrowserModule,
