@@ -22,6 +22,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MainComponent } from './components/main/main.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TerminosCondicionesComponent } from './components/terminos-condiciones/terminos-condiciones.component';
+import { HomeComponent } from './components/home/home.component';
+import { PostComponent } from './components/post/post.component';
+import { WallComponent } from './components/wall/wall.component';
 
 
 @NgModule({
@@ -31,7 +34,10 @@ import { TerminosCondicionesComponent } from './components/terminos-condiciones/
     SingupComponent,
     MainComponent,
     ProfileComponent,
-    TerminosCondicionesComponent
+    TerminosCondicionesComponent,
+    HomeComponent,
+    PostComponent,
+    WallComponent
   ],
   imports: [
     BrowserModule,
