@@ -1,0 +1,18 @@
+<div class="popup">
+    <div class="popup-content">
+      <h2>Publicar</h2>
+      <form (ngSubmit)="createPost()">
+        <label for="title">Título:</label>
+        <input type="text" id="title" name="title" [(ngModel)]="post.title" required>
+        <br>
+        <label for="description">Descripción:</label>
+        <textarea id="description" name="description" [(ngModel)]="post.description" required></textarea>
+        <br>
+        <label for="title">Documento:</label>
+        <input type="file" id="document" name="document" [(ngModel)]="post.document" required>
+        <br>
+        <button type="submit">Crear</button>
+        <button type="button" (click)="closePopup()">Cancelar</button>
+      </form>
+    </div>
+  </div>

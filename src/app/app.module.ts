@@ -26,6 +26,8 @@ import { HomeComponent } from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
 import { WallComponent } from './components/wall/wall.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { PostFormComponent } from './components/post-form/post-form.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     HomeComponent,
     PostComponent,
     WallComponent,
-    NavBarComponent
+    NavBarComponent,
+    PostFormComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
