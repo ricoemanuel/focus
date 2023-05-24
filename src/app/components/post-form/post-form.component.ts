@@ -10,19 +10,19 @@ import { Router } from '@angular/router';
 })
 export class PostFormComponent {
   post: Post = { title: '', autor: '', description: '', document: '' };
-  @Output() create: EventEmitter<Post> = new EventEmitter<Post>();
-  @Output() close: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private firebaseService: FirebaseService, private router: Router) {}
 
   async createPost() {
-    const response = await this.firebaseService.savePost(this.post);
-    this.router.navigate(['/home']);
-    //this.create.emit(this.post);
+    const documentInput = document.getElementById('document') as HTMLInputElement;
+    if (documentInput && documentInput.files) {
+      const file = documentInput.files[0]
+      const response = await this.firebaseService.savePost(this.post, file);
+      this.router.navigate(['/home']);
+    }
   }
 
   cleanForm() {
     this.post = { title: '', autor: '', description: '', document: '' };
-    this.close.emit();
   }
 }
