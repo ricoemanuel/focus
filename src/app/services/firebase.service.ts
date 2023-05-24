@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, getAuth } from '@angular/fire/auth';
-import { Firestore, doc, setDoc, collection, addDoc, collectionData, getDoc } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, collection, addDoc, collectionData, getDoc, query, where, CollectionReference  } from '@angular/fire/firestore';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fire/storage';
 import { Post } from '../components/post/post.model';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -103,5 +103,41 @@ export class FirebaseService {
   getPosts(): Observable<Post[]> {
     const postId = collection(this.firestore, 'posts');
     return collectionData(postId, { idField: 'id' }) as Observable<Post[]>;
+  }
+  
+  getPostsWithFilter(filter: string = ''): Observable<Post[]> {
+    console.log('filter:', filter);
+    const postId = collection(this.firestore, 'posts');
+    let postsQuery = query(postId);
+  
+    if (filter !== '') {
+      /*const lowercaseFilter = filter.toLowerCase();
+      postsQuery = query(postId, where('title', '!=', lowercaseFilter));*/
+    }
+  
+    return collectionData(postId, { idField: 'id' })
+      .pipe(
+        map(posts => {
+          if (filter !== '') {
+            const regexFilter = new RegExp(filter.toLowerCase(), 'i');
+            return posts
+              .filter(post => regexFilter.test(post['title']))
+              .map(postData => ({
+                id: postData['id'],
+                title: postData['title'],
+                autor: postData['autor'],
+                description: postData['description'],
+                document: postData['document']
+              }));
+          }
+          return posts.map(postData => ({
+            id: postData['id'],
+            title: postData['title'],
+            autor: postData['autor'],
+            description: postData['description'],
+            document: postData['document']
+          }));
+        })
+      );
   }
 }

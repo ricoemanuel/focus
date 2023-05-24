@@ -1,5 +1,5 @@
 
-<div class="post" *ngIf="post">
+<!-- <div class="post" *ngIf="post">
     <h2>{{ post.title }}</h2>
     <p class="post_description"><b>Autor</b></p>
     <p class="post_description_text">{{ post.autor }}</p>
@@ -7,4 +7,29 @@
     <p class="post_description_text">{{ post.description }}</p>
     <p class="post_description"><b>Conoce este artículo</b></p>
     <a href="{{ post.document }}" target="_blank">Descargar documento</a>
+  </div> -->
+
+
+  <div class="post" *ngIf="post">
+    <h2 class="post-title">{{ post.title }}</h2>
+    <p class="post-description">{{ post.description }}</p>
+    <p class="post-author">Autor: {{ post.autor }}</p>
+    <a class="download-button" href="{{ post.document }}" target="_blank" download>Descargar</a>
+    <div class="comments">
+      <textarea class="comment-box" placeholder="Escribe un comentario"></textarea>
+      <button class="comment-button">Enviar</button>
+      <div class="comment-list">
+        <h3>Comentarios:</h3>
+        <div class="comment">
+          <p>Me gusto</p>
+        </div>
+        <div class="comment">
+          <p>Buen trabajo</p>
+        </div>
+      </div>
+    </div>
+    <div class="likes">
+      <button class="like-button">Me gusta</button>
+      <span class="like-count">10</span>
+    </div>
   </div>
