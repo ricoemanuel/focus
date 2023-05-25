@@ -1,12 +1,17 @@
+.{
+  font-family: 'Courier New', Courier, monospace;
+}
 .profile {
     display: flex;
     padding: 20px;
+    margin-right: 8PX;
   }
   
   .profile-info {
     width: 250px;
     position: sticky;
     top: 20px;
+    margin-right: 30PX;
   }
   
   .profile-picture {
@@ -29,7 +34,7 @@
   
   .posts {
     flex: 1;
-    margin-left: 20px;
+    
     max-height: 500px;
     overflow-y: auto;
   }
@@ -52,5 +57,10 @@
   .user-wall {
     display: flex;
     flex-direction: column;
+  }
+
+  h4, h3, h2{
+    font-size: medium;
+    
   }
   

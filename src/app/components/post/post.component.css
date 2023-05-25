@@ -1,32 +1,11 @@
-/*.post{
-    border: solid 1px;
-    margin-bottom: 12px;
-    padding: 24px;
-    margin: 8px 18px 20px 18px;
-    
 
+.{
+  font-family: 'Courier New', Courier, monospace;
 }
-
-.post h2{
-    color: #79d300;
-
-}
-
-.post_description_text{
-    text-align:justify;
-}
-.post p{
-    font-size: 14px;
-
-}
-.post_description{
-    font-size: 15px;
-}*/
-
 
 .post {
-    background-color: #f2f2f2;
-    padding: 20px;
+    background-color: #fafffa;
+    padding: 40px;
     margin-bottom: 20px;
   }
   
@@ -45,13 +24,16 @@
   }
   
   .download-button {
+    width: 100%;
     display: inline-block;
-    background-color: #3498db;
+    background-color: #79d300;
     color: #fff;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 10px; 
+    text-align: center;
+    margin-bottom: 36px;
   }
   
   .comments {
@@ -63,12 +45,14 @@
     height: 100px;
     resize: vertical;
     padding: 5px;
+   
   }
   
   .comment-button {
-    background-color: #3498db;
+    margin-top: 20px;
+    background-color: #79d300;
     color: #fff;
-    padding: 5px 10px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -87,11 +71,18 @@
     cursor: pointer;
     margin-right: 10px;
   }
+
   
   .like-count {
     font-weight: bold;
+    margin-left: 5px;
+
   }
 
+  .likes button{
+    border: none;
+    background-color: transparent;
+  }
   img {
     max-width: 25px;
   }
@@ -101,9 +92,10 @@
   }
   
   .comment {
-    background-color: #f5f5f5;
+    background-color: #fff;
     padding: 10px;
     margin-bottom: 10px;
+    border-radius: 5px;
   }
   
   .comment p {
