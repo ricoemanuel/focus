@@ -31,12 +31,28 @@ export class PostComponent {
 
   async likePost() {
     console.log('like');
-    if (this.post && this.post.likes && !this.hasLiked) {
+    if (this.post && this.post.likes != null && !this.hasLiked) {
       this.post.likes++;
       this.hasLiked = true;
       const postId = this.post.id || '';
       await this.firebaseService.updatePostLikes(postId);
       this.updateLikeImageSrc();
+    }
+  }
+  
+  async unlikePost() {
+    console.log('unlike');
+    if (this.post && this.post.likes != null && this.hasLiked) {
+      console.log('unlike', this.post)
+      this.post.likes--;
+      this.hasLiked = false;
+      const postId = this.post.id || '';
+      try {
+        await this.firebaseService.removePostLike(postId);
+        this.updateLikeImageSrc();
+      } catch (error) {
+        console.error('Error al quitar el like:', error);
+      }
     }
   }
 

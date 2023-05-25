@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="likes">
-      <button [disabled]="hasLiked" (click)="likePost()"><img [src]="likeImageSrc" [alt]="'Me gusta'" [ngClass]="{'liked': hasLiked}" (click)="likePost()" />
+      <button><img [src]="likeImageSrc" [alt]="'Me gusta'" (click)="hasLiked ? unlikePost() : likePost()" />
       </button>
       <span class="like-count">{{post.likes}}</span>
     </div>

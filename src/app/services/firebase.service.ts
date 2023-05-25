@@ -131,20 +131,26 @@ export class FirebaseService {
               .filter(post => regexFilter.test(post['title']))
               .map(postData => ({
                 id: postData['id'],
+                userId: postData['userId'],
                 title: postData['title'],
                 autor: postData['autor'],
                 description: postData['description'],
                 document: postData['document'],
-                likes: postData['likes']
+                likes: postData['likes'],
+                likesBy: postData['likesBy'],
+                comments: postData['comments']
               }));
           }
           return posts.map(postData => ({
             id: postData['id'],
+            userId: postData['userId'],
             title: postData['title'],
             autor: postData['autor'],
             description: postData['description'],
             document: postData['document'],
-            likes: postData['likes']
+            likes: postData['likes'],
+            likesBy: postData['likesBy'],
+            comments: postData['comments']
           }));
         })
       );
@@ -179,6 +185,36 @@ export class FirebaseService {
         }
       }
       await setDoc(postRef, post, { merge: true });
+    } else {
+      throw new Error('El post no existe');
+    }
+  }
+
+  async removePostLike(postId: string) {
+    const user = this.userObserver();
+     
+    if (user == null || user.uid == null) {
+      throw new Error('No se pudo obtener el usuario activo.');
+    } 
+    
+    const userId = user?.uid;
+  
+    const postRef = doc(this.firestore, 'posts', postId);
+    const postSnapshot = await getDoc(postRef);
+    if (postSnapshot.exists()) {
+      const post = postSnapshot.data() as Post;
+      if (post.likes === undefined || post.likes <= 0) {
+        throw new Error('El post no tiene likes para remover.');
+      }
+      
+      const likeIndex = post.likesBy?.indexOf(userId);
+      if (likeIndex !== undefined && likeIndex !== -1) {
+        post.likes--;
+        post.likesBy?.splice(likeIndex, 1);
+        await setDoc(postRef, post, { merge: true });
+      } else {
+        throw new Error('El usuario no ha dado like a esta publicación.');
+      }
     } else {
       throw new Error('El post no existe');
     }
