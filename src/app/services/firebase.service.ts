@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, getAuth } from '@angular/fire/auth';
-import { Firestore, doc, setDoc, collection, addDoc, collectionData, getDoc, query, where, CollectionReference  } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, collection, addDoc, collectionData, getDoc, query, where, CollectionReference, deleteDoc  } from '@angular/fire/firestore';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fire/storage';
 import { Post } from '../components/post/post.model';
 import { CommentPost } from '../components/post/comment.post.model';
@@ -18,11 +18,11 @@ export class FirebaseService {
     return signInWithEmailAndPassword(this.auth, email, password)
   }
   userObserver() {
-    let usuario = this.auth.currentUser
-    return usuario
+    const usuario = this.auth.currentUser;
+    return usuario;
   }
   cerrarSesion() {
-    return signOut(this.auth)
+    return signOut(this.auth);
   }
   signUp(objeto: any) {
     let email = objeto["email"]
@@ -32,8 +32,8 @@ export class FirebaseService {
 
   addPersona(usuario: any, id: string) {
     usuario.estado = true;
-    const usuarioRef = doc(this.firestore, "usuarios", id)
-    return setDoc(usuarioRef, usuario)
+    const usuarioRef = doc(this.firestore, "usuarios", id);
+    return setDoc(usuarioRef, usuario);
   }
 
   async getPersona(id: string) {
@@ -52,13 +52,13 @@ export class FirebaseService {
   }
 
   async getPersonaActiva() {
-    const user = this.userObserver();
+    const user = await this.userObserver();
     if (user != null) {
-      let userActive = this.getPersona(user.uid);
-      return userActive;
+      return await this.getPersona(user.uid);
     }
-    return undefined;
+    return null;
   }
+  
 
   async savePost(post: Post, file: any) {
     const userObserver = this.userObserver();
@@ -156,6 +156,18 @@ export class FirebaseService {
       );
   }
 
+  getPostByUser(userId: string): Observable<Post[]> {
+    /*const userObserver = this.userObserver();
+    if (userObserver == null || userObserver.uid == null) {
+      throw new Error('No se pudo obtener el usuario activo.');
+    }*/
+  
+    const postId = collection(this.firestore, 'posts');
+    const postsQuery = query(postId, where('userId', '==', userId));
+  
+    return collectionData(postsQuery, { idField: 'id' }) as Observable<Post[]>;
+  }
+  
 
   async updatePostLikes(postId: string) {
     const user = this.userObserver();
@@ -247,5 +259,35 @@ export class FirebaseService {
     } else {
       throw new Error('El post no existe');
     }
+  }
+
+  async deletePost(post?: Post) {
+    try {
+      const postRef = doc(this.firestore, `posts/${post?.id}`);
+      return deleteDoc(postRef);
+    } catch (error) {
+      throw new Error('Error al borrar el post: ' + error);
+    }
+  }
+  
+
+  async getUserProfile() {
+    let user: any = {};
+    
+    const userInfo = await this.getPersonaActiva();
+    console.log(userInfo);
+    
+    if (userInfo) {
+      user.fullname = userInfo['firstName'] + ' ' + userInfo['lastName'];
+      user.profilePicture = userInfo['photoUrl'];
+      user.dateOfBirth = userInfo['birthdate'];
+    }
+    
+    user.biography = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices augue tortor. Nulla efficitur hendrerit porttitor. Quisque at tortor sed risus dapibus ullamcorper. Donec a sodales felis, finibus ullamcorper eros. Etiam at nisi placerat, ultrices eros a, condimentum nunc. Aliquam faucibus mi id sapien scelerisque egestas. Nulla auctor dolor in viverra pellentesque. Phasellus pulvinar egestas urna in feugiat. Proin semper sed est at semper. Suspendisse quis venenatis risus. Morbi posuere porttitor elit ac porta. Nullam a congue mi, vel molestie orci. Mauris eget interdum justo. Praesent a lacus sit amet urna sodales malesuada.';
+  
+    const posts = await this.getPosts();
+    user.posts = posts;
+  
+    return user;
   }
 }

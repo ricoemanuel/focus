@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  errorMessage: string = '';
+
   firstFormGroup = this._formBuilder.group({
     correo: ['', Validators.required],
     contrasena:['', Validators.required],
@@ -18,9 +20,16 @@ export class LoginComponent {
   async iniciarSesion(){
     let password=this.firstFormGroup.value.contrasena;
     let email=this.firstFormGroup.value.correo;
-    let usuario=await this.firebase.login({email,password})
-    localStorage.setItem("login","true")
-    localStorage.setItem("user",usuario.user.uid)
-    this.router.navigate(['/home']);
+
+    try {
+      let usuario = await this.firebase.login({email,password});
+      this.router.navigate(['/home']);
+      localStorage.setItem("login","true")
+      localStorage.setItem("user",usuario.user.uid)
+    } catch (error) {
+      console.error('Error al iniciar sesion:', error);
+      console.log('error');
+      this.errorMessage = 'El usuario o la contraseña son incorrectos';
+    }
   }
 }

@@ -15,6 +15,7 @@
             <mat-label>Contraseña</mat-label>
             <input type="password" matInput placeholder="" formControlName="contrasena" required>
           </mat-form-field><br>
+          <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
          
           <div class="mx-auto button">
             <button mat-button  (click)="iniciarSesion()" >Iniciar sesión</button>

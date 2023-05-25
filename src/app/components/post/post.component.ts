@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Post } from './post.model';
 import { FirebaseService } from '../../services/firebase.service';
-import { CommentPost } from './comment.post.model';
 
 @Component({
   selector: 'app-post',
@@ -11,6 +10,7 @@ import { CommentPost } from './comment.post.model';
 export class PostComponent {
   @Input() post?: Post;
   hasLiked: boolean = false;
+  myPost: boolean = false;
   likeImageSrc: string = '';
   commentText: string = '';
 
@@ -25,6 +25,7 @@ export class PostComponent {
     if (user) {
       const postId = this.post?.id || '';
       this.hasLiked = this.post?.likesBy?.includes(user.uid) || false;
+      this.myPost = this.post?.userId == user.uid || false;
     }
     this.updateLikeImageSrc();
   }
@@ -73,5 +74,9 @@ export class PostComponent {
       console.error('Error al guardar el comentario:', error);
       
     }
+  }
+
+  deletePost() {
+    this.firebaseService.deletePost(this.post);
   }
 }
