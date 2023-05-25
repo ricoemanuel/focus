@@ -65,6 +65,7 @@ export class FirebaseService {
         const fileUrl = await this.uploadImage(file);
         post.autor = user['firstName'] + ' ' + user['lastName'];
         post.document = fileUrl;
+        post.likes = 0;
         const postId = collection(this.firestore, 'posts');
         return addDoc(postId, post);
       } catch (error) {
@@ -127,7 +128,8 @@ export class FirebaseService {
                 title: postData['title'],
                 autor: postData['autor'],
                 description: postData['description'],
-                document: postData['document']
+                document: postData['document'],
+                likes: postData['likes']
               }));
           }
           return posts.map(postData => ({
@@ -135,9 +137,44 @@ export class FirebaseService {
             title: postData['title'],
             autor: postData['autor'],
             description: postData['description'],
-            document: postData['document']
+            document: postData['document'],
+            likes: postData['likes']
           }));
         })
       );
+  }
+
+
+  async updatePostLikes(postId: string) {
+    const user = this.userObserver();
+   
+    if (user == null || user.uid == null) {
+      throw new Error('No se pudo obtener el usuario activo.');
+    } 
+    
+    const userId = user?.uid;
+
+    const postRef = doc(this.firestore, 'posts', postId);
+    const postSnapshot = await getDoc(postRef);
+    if (postSnapshot.exists()) {
+      const post = postSnapshot.data() as Post;
+      if (post.likes === undefined) {
+        post.likes = 1;
+      } else {
+        post.likes++;
+      }
+      if (!post.likesBy) {
+        post.likesBy = [userId];
+      } else {
+        if (!post.likesBy.includes(userId)) {
+          post.likesBy.push(userId);
+        } else {
+          throw new Error('El usuario ya ha dado like a esta publicación.');
+        }
+      }
+      await setDoc(postRef, post, { merge: true });
+    } else {
+      throw new Error('El post no existe');
+    }
   }
 }

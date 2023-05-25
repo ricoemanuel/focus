@@ -4,5 +4,7 @@ export interface Post {
     autor: string;
     description: string;
     document: string;
+    likes?: number;
+    likesBy?: string[];
   }
   

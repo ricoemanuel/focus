@@ -92,3 +92,7 @@
   .like-count {
     font-weight: bold;
   }
+git 
+  button.liked {
+    background-color: rgb(16, 243, 88);
+  }

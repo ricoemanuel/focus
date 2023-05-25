@@ -20,6 +20,9 @@
       <button class="comment-button">Enviar</button>
       <div class="comment-list">
         <h3>Comentarios:</h3>
+        <!-- <div *ngFor="let comment of post.comments" class="comment">
+          <p>{{ comment }}</p>
+        </div> -->
         <div class="comment">
           <p>Me gusto</p>
         </div>
@@ -29,7 +32,7 @@
       </div>
     </div>
     <div class="likes">
-      <button class="like-button">Me gusta</button>
-      <span class="like-count">10</span>
+      <button [disabled]="hasLiked" [ngClass]="{'liked': hasLiked}" (click)="likePost()">Me gusta</button>
+      <span class="like-count">{{post.likes}}</span>
     </div>
   </div>
