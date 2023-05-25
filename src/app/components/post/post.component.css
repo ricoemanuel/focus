@@ -1,5 +1,5 @@
 
-.{
+body{
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -15,12 +15,13 @@
   }
   
   .post-description {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+    margin-top: 20px;
   }
   
   .post-author {
     font-style: italic;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   
   .download-button {
@@ -30,11 +31,27 @@
     color: #fff;
     padding: 10px 20px;
     text-decoration: none;
-    border-radius: 5px;
-    margin-bottom: 10px; 
     text-align: center;
     margin-bottom: 36px;
+    font-size: 14px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 8px;
+    transition : 236ms;
+    transform: translateY(0);
+    flex-direction: row;
+    cursor: pointer;
+    text-align: center;
   }
+  .download-button:hover, .comment-button:hover{
+
+   
+    transform : translateY(-0px);
+    background-color: #fff;
+    color: #79d300;
+    border: solid 1px #79d300;
+  }
+
+
   
   .comments {
     margin-bottom: 10px;
@@ -50,12 +67,22 @@
   
   .comment-button {
     margin-top: 20px;
+    border: none;
+    display: inline-block;
     background-color: #79d300;
     color: #fff;
     padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 36px;
+    font-size: 14px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 8px;
+    transition : 236ms;
+    transform: translateY(0);
+    flex-direction: row;
     cursor: pointer;
+    text-align: center;
   }
   
   .likes {
@@ -103,7 +130,7 @@
   }
   
   .comment p:first-child {
-    font-weight: bold;
+    font-weight: medium;
   }
   
   .comment p:last-child {

@@ -10,7 +10,7 @@
         <textarea id="description" name="description" [(ngModel)]="post.description" required></textarea>
         <br>
         <label for="title">Documento:</label>
-        <input type="file" id="document" name="document" required>
+        <input class="document_up" type="file" id="document" name="document" required>
         <br>
         <button  class="btn" type="submit">Crear</button>
         <button  class="btn" type="button" (click)="cleanForm()">Limpiar</button>
