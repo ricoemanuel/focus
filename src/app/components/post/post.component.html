@@ -16,23 +16,19 @@
     <p class="post-author">Autor: {{ post.autor }}</p>
     <a class="download-button" href="{{ post.document }}" target="_blank" download>Descargar</a>
     <div class="comments">
-      <textarea class="comment-box" placeholder="Escribe un comentario"></textarea>
-      <button class="comment-button">Enviar</button>
+      <textarea class="comment-box" placeholder="Escribe un comentario" [(ngModel)]="commentText"></textarea>
+      <button class="comment-button" (click)="saveComment()">Enviar</button>
       <div class="comment-list">
         <h3>Comentarios:</h3>
-        <!-- <div *ngFor="let comment of post.comments" class="comment">
-          <p>{{ comment }}</p>
-        </div> -->
-        <div class="comment">
-          <p>Me gusto</p>
-        </div>
-        <div class="comment">
-          <p>Buen trabajo</p>
+        <div *ngFor="let comment of post.comments" class="comment">
+          <p>{{ comment.comment }}</p>
+          <p class="post-author">Autor: {{ comment.user }}</p>
         </div>
       </div>
     </div>
     <div class="likes">
-      <button [disabled]="hasLiked" [ngClass]="{'liked': hasLiked}" (click)="likePost()">Me gusta</button>
+      <button [disabled]="hasLiked" (click)="likePost()"><img [src]="likeImageSrc" [alt]="'Me gusta'" [ngClass]="{'liked': hasLiked}" (click)="likePost()" />
+      </button>
       <span class="like-count">{{post.likes}}</span>
     </div>
   </div>

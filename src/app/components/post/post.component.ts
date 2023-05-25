@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Post } from './post.model';
 import { FirebaseService } from '../../services/firebase.service';
+import { CommentPost } from './comment.post.model';
 
 @Component({
   selector: 'app-post',
@@ -10,6 +11,8 @@ import { FirebaseService } from '../../services/firebase.service';
 export class PostComponent {
   @Input() post?: Post;
   hasLiked: boolean = false;
+  likeImageSrc: string = '';
+  commentText: string = '';
 
   constructor(private firebaseService: FirebaseService) {}
 
@@ -23,6 +26,7 @@ export class PostComponent {
       const postId = this.post?.id || '';
       this.hasLiked = this.post?.likesBy?.includes(user.uid) || false;
     }
+    this.updateLikeImageSrc();
   }
 
   async likePost() {
@@ -32,6 +36,26 @@ export class PostComponent {
       this.hasLiked = true;
       const postId = this.post.id || '';
       await this.firebaseService.updatePostLikes(postId);
+      this.updateLikeImageSrc();
+    }
+  }
+
+  updateLikeImageSrc() {
+    this.likeImageSrc = this.hasLiked ? 'assets/like_icon.png' : 'assets/no_like_icon.png' ;
+  }
+
+  async saveComment() {
+    if (this.commentText.trim() === '') {
+      return;
+    }
+  
+    const postId = this.post?.id || '';
+    try {
+      await this.firebaseService.saveComment(postId, this.commentText.trim());
+      this.commentText = '';
+    } catch (error) {
+      console.error('Error al guardar el comentario:', error);
+      
     }
   }
 }
