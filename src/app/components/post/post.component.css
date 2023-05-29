@@ -2,13 +2,19 @@
 body{
   font-family: 'Courier New', Courier, monospace;
 }
-
+/* #f5ffe5 */
 .post {
-    background-color: #fafffa;
-    padding: 40px;
-    margin-bottom: 20px;
+  padding: 40px;
+  margin-bottom: 0px;
+  border: solid 1px #dddddd;
+  border-radius: 5px;
+}
+
+.post:hover{
+    background-color: #eeeeee;
+
   }
-  
+
   .post-title {
     font-size: 24px;
     margin-bottom: 10px;
@@ -119,7 +125,7 @@ body{
   }
   
   .comment {
-    background-color: #fff;
+    /* background-color: #fff; */
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;

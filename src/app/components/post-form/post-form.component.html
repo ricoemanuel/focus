@@ -3,13 +3,13 @@
     <div class="popup-content">
       <h1>Publicar</h1>
       <form (ngSubmit)="createPost()">
-        <label for="title">Título:</label>
+        <label for="title">Título:(*)</label>
         <input type="text" id="title" name="title" [(ngModel)]="post.title" required>
         <br>
         <label for="description">Descripción:</label>
         <textarea id="description" name="description" [(ngModel)]="post.description" required></textarea>
         <br>
-        <label for="title">Documento:</label>
+        <label for="title">Documento:(*)</label>
         <input class="document_up" type="file" id="document" name="document" required>
         <br>
         <button  class="btn" type="submit">Crear</button>

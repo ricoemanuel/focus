@@ -29,6 +29,7 @@ import { WallComponent } from './components/wall/wall.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
 import { FormsModule } from '@angular/forms';
+import { NavBarVertComponent } from './components/nav-bar-vert/nav-bar-vert.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { FormsModule } from '@angular/forms';
     PostComponent,
     WallComponent,
     NavBarComponent,
-    PostFormComponent
+    PostFormComponent,
+    NavBarVertComponent
   ],
   imports: [
     BrowserModule,
