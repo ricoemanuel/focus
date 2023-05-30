@@ -1,5 +1,57 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 200px;  
+    height: 550px;
+}
+
+
+.logo p{
+    margin-top: 40px;
+    font-size: 25px;
+    color: #79d300;
+    text-align: center;
+    user-select: none;
+}
+
+.nav{
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 60px;
+
+}
+
+.menu ul a{
+    text-decoration: none;
+    color: black;
+    list-style: none;
+    line-height: 30px;
+    padding-left: 0px;
+    font-size: 16px;
+    
+    
+}
+
+.menu, .menu-bottom{
+    text-align: center;
+
+}
+
+.menu-bottom ul a{
+    line-height: 30px;
+    text-decoration: none;
+    color: black;
+    list-style: none;
+    font-size: 16px;
+  
+
+
+}
+
+.menu ul a:hover {
+    color: #79d300;
+}
+.menu-bottom ul a:hover {
+    color: #79d300;
 }

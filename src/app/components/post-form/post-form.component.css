@@ -60,3 +60,14 @@ label{
 .document_up{
   align-self: center;
 }
+
+input{
+  border: solid 1px #ddd;
+  border-radius: 5px;
+  height: 30px;
+}
+
+textarea{
+  border: solid 1px #ddd;
+  border-radius: 5px;
+}

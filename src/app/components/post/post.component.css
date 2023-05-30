@@ -48,7 +48,7 @@ body{
     cursor: pointer;
     text-align: center;
   }
-  .download-button:hover, .comment-button:hover{
+  .download-button:hover, .comment-button:hover, .delete-buttom:hover{
 
    
     transform : translateY(-0px);
@@ -72,6 +72,26 @@ body{
   }
   
   .comment-button {
+    margin-top: 20px;
+    border: none;
+    display: inline-block;
+    background-color: #79d300;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 36px;
+    font-size: 14px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 8px;
+    transition : 236ms;
+    transform: translateY(0);
+    flex-direction: row;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .delete-buttom{
     margin-top: 20px;
     border: none;
     display: inline-block;
