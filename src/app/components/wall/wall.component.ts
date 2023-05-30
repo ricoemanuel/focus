@@ -15,7 +15,6 @@ export class WallComponent implements OnInit {
 
   constructor(private firebaseService: FirebaseService) {
     this.posts = [];
-
     this.firebaseService.getPosts().subscribe(posts => {
       this.posts = posts;
     });

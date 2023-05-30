@@ -1,6 +1,7 @@
 <div class="wall">
     <div class="search">
-        <a>Buscar</a><input type="search" name="busqueda" [formControl]="search" >
+        <p>¿Qué quieres aprender hoy?</p>
+        <a></a><input placeholder="Escribe que deseas buscar" type="search" name="busqueda" [formControl]="search" >
     </div>
     <app-post *ngFor="let post of posts" [post]="post"></app-post>
 </div>

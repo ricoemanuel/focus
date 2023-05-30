@@ -11,12 +11,12 @@
 
 
   <div class="post" *ngIf="post">
+    <button class="delete-buttom" *ngIf="myPost" (click)="deletePost()">Borrar</button>
     <h2 class="post-title">{{ post.title }}</h2>
     
     <p class="post-description">{{ post.description }}</p>
     <p class="post-author">Autor: {{ post.autor }}</p>
     <a class="download-button" href="{{ post.document }}" target="_blank" download>Descarga este artículo haciendo clic.</a>
-    <button *ngIf="myPost" (click)="deletePost()">Borrar</button>
     <div class="comments">
       <textarea class="comment-box" placeholder="Escribe un comentario" [(ngModel)]="commentText"></textarea>
       <button class="comment-button" (click)="saveComment()">Comentar</button>
