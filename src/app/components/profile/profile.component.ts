@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit{
 
   ngOnInit() {
     this.loadUserInfo();
-    this.firebaseService.getPostByUser(localStorage.getItem('user')?? '').subscribe(posts => {
+    this.firebaseService.getPostByUser(localStorage.getItem('useruidg')?? '').subscribe(posts => {
       this.posts = posts;
     });
   }
