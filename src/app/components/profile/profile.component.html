@@ -4,7 +4,7 @@
   <div class="profile-info">
     <div class="profile-picture">
       <img src="{{ user.profilePicture }}" alt="Foto de perfil" (click)="openFilePicker()">
-      <button (click)="openFilePicker()">Cambiar foto de perfil</button>
+      <button class="photo-buttom" (click)="openFilePicker()">Cambiar foto de perfil</button>
     </div>
     <div class="profile-details">
       <h2>{{ user.fullname}}</h2>
@@ -16,7 +16,7 @@
     <div class="bio">
       <h3>Biografía:</h3>
       <p *ngIf="!showForm">{{ user.biography }}</p>
-      <button *ngIf="!showForm" (click)="showEditForm()">Editar biografía</button>
+      <button class="bio-buttom" *ngIf="!showForm" (click)="showEditForm()">Editar biografía</button>
 
       <div *ngIf="showForm">
         <form (ngSubmit)="saveBiography()">

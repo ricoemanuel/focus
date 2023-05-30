@@ -14,7 +14,9 @@
         <div class="menu-bottom">
             <nav>
                 <li><a href="/profile">{{ user.fullname }}</a></li>
-                <img src="{{ user.photoUrl }}" alt="">
+                <div class="profile-picture">
+                    <img src="{{ user.photoUrl }}" alt="">
+                </div>
                 <li><a href="/inicio">Cerrar sesión</a></li>
             </nav>
         </div>
