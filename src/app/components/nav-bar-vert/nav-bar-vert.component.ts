@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-nav-bar-vert',
