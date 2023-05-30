@@ -19,7 +19,7 @@
     </div>
     <div class="bio">
       <h3>Biografía:</h3>
-      <p *ngIf="!showForm">{{ user.biography }}</p>
+      <p class="bio-text" *ngIf="!showForm">{{ user.biography }}</p>
       <button class="bio-buttom" *ngIf="!showForm" (click)="showEditForm()">Editar biografía</button>
       <div *ngIf="showForm">
         <form (ngSubmit)="saveBiography()">

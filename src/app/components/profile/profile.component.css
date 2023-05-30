@@ -29,7 +29,8 @@ body{
     max-width: 250px;
     max-height: 250px;
     /* object-fit: cover; */
-    /*border-radius: 50%;*/
+    border-radius: 15%;
+    margin-bottom: 30px;
   }
 
   .profile-picture-button{
@@ -41,12 +42,23 @@ body{
     display: flex;
     flex-direction: column;
     padding: 20px 80px;
+    /* text-align: center; */
   }
 
   .bio {
     display: flex;
     flex-direction: column;
     padding: 20px 80px;
+  }
+  .bio h3{
+    font-size: larger;
+    font-weight: 500;
+    
+  }
+
+  .bio-text{
+    line-height: 25px;
+    font-size: 16px;
   }
   
   .posts {
@@ -145,7 +157,7 @@ body{
   .file-button {
     pointer-events: none;
   }
-  
+
   .file-label::before {
     content: "";
     position: absolute;

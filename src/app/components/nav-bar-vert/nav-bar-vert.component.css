@@ -9,7 +9,7 @@
     flex-direction: column;
     width: 200px;  
     height: 90vh;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
     position: sticky;
 }
 
