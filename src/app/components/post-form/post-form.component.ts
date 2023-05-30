@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Post } from '../post/post.model';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-post-form',
@@ -18,6 +19,12 @@ export class PostFormComponent {
     if (documentInput && documentInput.files) {
       const file = documentInput.files[0]
       const response = await this.firebaseService.savePost(this.post, file);
+      Swal.fire({
+        icon: 'success',
+        title: 'Publicación exitosa',
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.router.navigate(['/home']);
     }
   }

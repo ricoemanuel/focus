@@ -1,6 +1,5 @@
 .body {
   display: flex;
-  justify-content: space-evenly;
 }
 
 
@@ -11,7 +10,7 @@ h1{
 }
 form {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -76,4 +75,18 @@ input{
 textarea{
   border: solid 1px #ddd;
   border-radius: 5px;
+}
+
+.popup {
+  width: 100vw;
+}
+
+.popup form {
+  margin: 0;
+}
+
+.popup-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

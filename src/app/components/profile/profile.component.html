@@ -4,33 +4,34 @@
   <div class="profile-info">
     <div class="profile-picture">
       <img src="{{ user.profilePicture }}" alt="Foto de perfil" (click)="openFilePicker()">
-      <div class="profile-picture">
+      <div class="profile-picture-button">
         <label class="file-label">
-          <input type="file" class="file-input" (change)="onFileSelected($event)" accept="image/*">
+          <input type="file" class="file-input photo-buttom" (change)="onFileSelected($event)" accept="image/*">
           <span class="file-button">Cambiar</span>
         </label>
       </div>
     </div>
-    <div class="profile-details">
+  </div>
+  <div class="profile-details">
       <h2>{{ user.fullname}}</h2>
       <p>Correo: {{ user.email }}</p>
       <p>Fecha de nacimiento: {{ user.dateOfBirth }}</p>
     </div>
-  </div>
-  <div class="user-wall">
     <div class="bio">
       <h3>Biografía:</h3>
       <p *ngIf="!showForm">{{ user.biography }}</p>
       <button class="bio-buttom" *ngIf="!showForm" (click)="showEditForm()">Editar biografía</button>
-
       <div *ngIf="showForm">
         <form (ngSubmit)="saveBiography()">
           <textarea [(ngModel)]="editedBiography" name="biography"></textarea>
-          <button type="submit">Guardar</button>
-          <button type="submit" (click)="showForm = true">Cancelar</button>
+          <div>
+            <button type="submit" class="bio-buttom">Guardar</button>
+            <button type="submit" class="bio-buttom" (click)="showForm = true">Cancelar</button>
+          </div>
         </form>
       </div>
     </div>
+  <div class="user-wall">
     <div class="posts">
       <h3>Posts publicados:</h3>
       <app-post *ngFor="let post of posts" [post]="post"></app-post>

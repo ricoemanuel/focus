@@ -1,22 +1,25 @@
 <header class="navbar">
     
     <div class="container">
-        <div class="logo">
-            <p class="logo">Focus Web</p>
-            <!-- <a href="/home" class="navbar-logo">Focus WEB</a> -->
+        <div class="header">
+            <div class="logo">
+                <p class="logo">Focus Web</p>
+                <!-- <a href="/home" class="navbar-logo">Focus WEB</a> -->
+            </div>
+            <div class="menu">
+                <!-- <ul><a>Buscar</a><input type="search" name="busqueda" [formControl]="search" ></ul> -->
+                <ul><a href="/home">Inicio</a></ul>
+                <ul><a href="/publish">Publicar</a></ul>
+                <ul><a href="/profile">Mi Perfil</a></ul>
+            </div>
         </div>
-        <div class="menu">
-            <!-- <ul><a>Buscar</a><input type="search" name="busqueda" [formControl]="search" ></ul> -->
-            <ul><a href="/home">Inicio</a></ul>
-            <ul><a href="/publish">Publicar</a></ul>
-            <ul><a href="/profile">Mi Perfil</a></ul>
-        </div>
+
         <div class="menu-bottom">
             <nav>
-                <li><a href="/profile">{{ user.fullname }}</a></li>
                 <div class="profile-picture">
                     <img src="{{ user.photoUrl }}" alt="">
                 </div>
+                <li><a href="/profile">{{ user.fullname }}</a></li>
                 <li><a href="/inicio">Cerrar sesión</a></li>
             </nav>
         </div>
