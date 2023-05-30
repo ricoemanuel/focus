@@ -40,6 +40,7 @@ body{
   .profile-details {
     display: flex;
     flex-direction: column;
+    margin-top: 120px;
   }
   
   .posts {
@@ -92,17 +93,27 @@ body{
     font-size: 16px;
   }
 
-  .file-input {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-  }
-  
-  .file-label {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #e9e9e9;
+
+  .bio-buttom{
+    font-size: 14px;
+    color: #fff;
+    background-color: #79d300;
+    padding: 10px 33px;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 8px;
+     cursor: pointer;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .photo-buttom{
+    font-size: 14px;
+    color: #fff;
+    background-color: #79d300;
+    padding: 10px 33px;
+    border: none;
+    border-radius: 8px;
+     cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
   }

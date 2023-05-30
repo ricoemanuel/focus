@@ -55,3 +55,17 @@
 .menu-bottom ul a:hover {
     color: #79d300;
 }
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-picture img {
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+    border-radius: 50%;
+  }
