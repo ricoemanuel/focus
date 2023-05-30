@@ -1,9 +1,10 @@
-<app-nav-bar-vert></app-nav-bar-vert>
+<div class="body">
+  <app-nav-bar-vert></app-nav-bar-vert>
 <div class="profile">
   <div class="profile-info">
     <div class="profile-picture">
       <img src="{{ user.profilePicture }}" alt="Foto de perfil" (click)="openFilePicker()">
-      <button (click)="openFilePicker()">Cambiar foto de perfigit l</button>
+      <button (click)="openFilePicker()">Cambiar foto de perfil</button>
     </div>
     <div class="profile-details">
       <h2>{{ user.fullname}}</h2>
@@ -30,3 +31,4 @@
       <app-post *ngFor="let post of posts" [post]="post"></app-post>
     </div>
   </div>
+</div>

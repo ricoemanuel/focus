@@ -2,6 +2,13 @@ body{
   font-family: 'Courier New', Courier, monospace;
 }
 
+.body {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+
 .profile {
     display: flex;
     padding: 50px;

@@ -1,5 +1,6 @@
-<app-nav-bar-vert></app-nav-bar-vert>
-<div class="popup">
+<div class="body">
+  <app-nav-bar-vert></app-nav-bar-vert>
+  <div class="popup">
     <div class="popup-content">
       <h1>Publicar</h1>
       <form (ngSubmit)="createPost()">
@@ -7,13 +8,15 @@
         <input placeholder="ingrese el titulo" type="text" id="title" name="title" [(ngModel)]="post.title" required>
         <br>
         <label for="description">Descripción:</label>
-        <textarea placeholder="Ingrese la descripción" id="description" name="description" [(ngModel)]="post.description" required></textarea>
+        <textarea placeholder="Ingrese la descripción" id="description" name="description"
+          [(ngModel)]="post.description" required></textarea>
         <br>
         <label for="title">Documento:(*)</label>
         <input class="document_up" type="file" id="document" name="document" required>
         <br>
-        <button  class="btn" type="submit">Crear</button>
-        <button  class="btn" type="button" (click)="cleanForm()">Limpiar</button>
+        <button class="btn" type="submit">Crear</button>
+        <button class="btn" type="button" (click)="cleanForm()">Limpiar</button>
       </form>
     </div>
   </div>
+</div>

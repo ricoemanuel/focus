@@ -20,7 +20,7 @@ export class NavBarVertComponent implements OnInit {
     this.firebaseService.getUserInfo()
       .then((userInfo) => {
         this.user = {
-          fullname: userInfo['firstName'] + ' ' + userInfo['firstName'],
+          fullname: userInfo['firstName'] + ' ' + userInfo['lastName'],
           email: userInfo['email'],
           photoUrl: userInfo['photoUrl']
         }
