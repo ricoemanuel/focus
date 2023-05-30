@@ -1,23 +1,32 @@
 <app-nav-bar></app-nav-bar>
 <div class="profile">
-    <div class="profile-info">
-      <div class="profile-picture">
-        <img src="{{ user.profilePicture }}" alt="Foto de perfil">
-      </div>
-      <div class="profile-details">
-        <h2>{{ user.fullname}}</h2>
-        <p>Correo: {{ user.email }}</p>
-        <p>Fecha de nacimiento: {{ user.dateOfBirth }}</p>
-      </div>
+  <div class="profile-info">
+    <div class="profile-picture">
+      <img src="{{ user.profilePicture }}" alt="Foto de perfil" (click)="openFilePicker()">
+      <button (click)="openFilePicker()">Cambiar foto de perfil</button>
     </div>
-    <div class="user-wall">
+    <div class="profile-details">
+      <h2>{{ user.fullname}}</h2>
+      <p>Correo: {{ user.email }}</p>
+      <p>Fecha de nacimiento: {{ user.dateOfBirth }}</p>
+    </div>
+  </div>
+  <div class="user-wall">
     <div class="bio">
       <h3>Biografía:</h3>
-      <p>{{ user.biography }}</p>
+      <p *ngIf="!showForm">{{ user.biography }}</p>
+      <button *ngIf="!showForm" (click)="showEditForm()">Editar biografía</button>
+
+      <div *ngIf="showForm">
+        <form (ngSubmit)="saveBiography()">
+          <textarea [(ngModel)]="editedBiography" name="biography"></textarea>
+          <button type="submit">Guardar</button>
+          <button type="submit" (click)="showForm = true">Cancelar</button>
+        </form>
+      </div>
     </div>
     <div class="posts">
       <h3>Posts publicados:</h3>
       <app-post *ngFor="let post of posts" [post]="post"></app-post>
     </div>
-</div>
-  
+  </div>

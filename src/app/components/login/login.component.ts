@@ -25,7 +25,7 @@ export class LoginComponent {
       let usuario = await this.firebase.login({email,password});
       this.router.navigate(['/home']);
       localStorage.setItem("login","true")
-      localStorage.setItem("user",usuario.user.uid)
+      localStorage.setItem("useruid", usuario.user.uid)
     } catch (error) {
       console.error('Error al iniciar sesion:', error);
       console.log('error');

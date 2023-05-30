@@ -66,4 +66,21 @@ body{
     font-size: medium;
     
   }
+
+  .profile-picture {
+    position: relative;
+  }
   
+  .profile-picture:hover img {
+    opacity: 0.7;
+  }
+  
+  .profile-picture:hover::after {
+    content: 'Cambiar';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+  }

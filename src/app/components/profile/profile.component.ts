@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Post } from '../post/post.model';
 
@@ -10,22 +10,69 @@ import { Post } from '../post/post.model';
 })
 export class ProfileComponent implements OnInit{
   posts: Post[] = [];
+  user: any = {};
+  showForm = false;
+  editedBiography = '';
 
-  user: any = {
-    fullname: 'Usuario',
-    email: 'usuario@mailinator.com',
-    profilePicture: 'https://firebasestorage.googleapis.com/v0/b/focus-udem.appspot.com/o/images%2FuYd9g27QmFO7eZRtg8qKoVPVJyb2.jpg?alt=media&token=ee702bc6-01be-4bf2-b5f4-c63a53b21daf',
-    dateOfBirth: '00 / 00 / 0000',
-    biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices augue tortor. Nulla efficitur hendrerit porttitor. Quisque at tortor sed risus dapibus ullamcorper. Donec a sodales felis, finibus ullamcorper eros. Etiam at nisi placerat, ultrices eros a, condimentum nunc. Aliquam faucibus mi id sapien scelerisque egestas. Nulla auctor dolor in viverra pellentesque. Phasellus pulvinar egestas urna in feugiat. Proin semper sed est at semper. Suspendisse quis venenatis risus. Morbi posuere porttitor elit ac porta. Nullam a congue mi, vel molestie orci. Mauris eget interdum justo. Praesent a lacus sit amet urna sodales malesuada.',
-  };
-
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firebaseService: FirebaseService, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    //this.user = this.firebaseService.getUserProfile();
+    this.loadUserInfo();
     this.firebaseService.getPostByUser(localStorage.getItem('user')?? '').subscribe(posts => {
       this.posts = posts;
-      console.log('OK');
     });
+  }
+
+  loadUserInfo() {
+    this.firebaseService.getUserInfo()
+      .then((userInfo) => {
+        console.log('profile', userInfo);
+        const fechaEnMilisegundos = userInfo['birthdate'].seconds * 1000;
+        const fecha = new Date(fechaEnMilisegundos);
+        this.user = {
+          fullname: userInfo['firstName'] + ' ' + userInfo['firstName'],
+          email: userInfo['email'],
+          profilePicture: userInfo['photoUrl'],
+          dateOfBirth: fecha.toLocaleDateString(),
+          biography: userInfo['biography'],
+        
+        }
+      })
+      .catch((error) => {
+        console.error('Error al cargar la información del usuario:', error);
+      });
+  }
+
+  showEditForm() {
+    this.showForm = true;
+    this.editedBiography = this.user.biography;
+  }
+
+  saveBiography() {
+    this.user.biography = this.editedBiography;
+    this.firebaseService.updateUserBiography(this.editedBiography);
+    this.showForm = false; 
+  }
+  
+  selectedFile: File | undefined;
+
+  onFileSelected(files: FileList | null) {
+    if (files && files.length > 0) {
+      this.selectedFile = files[0];
+    }
+  }
+  
+  openFilePicker() {
+    if (this.selectedFile) {
+      this.firebaseService.saveProfilePicture(this.selectedFile)
+        .then(() => {
+          console.log('Foto de perfil guardada exitosamente');
+        })
+        .catch(error => {
+          console.error('Error al guardar la foto de perfil:', error);
+        });
+    } else {
+      console.warn('No se ha seleccionado ningún archivo');
+    }
   }
 }

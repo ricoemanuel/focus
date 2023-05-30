@@ -15,15 +15,16 @@ export class FirebaseService {
   login(objeto: any) {
     let email = objeto["email"]
     let password = objeto["password"]
+    localStorage.setItem('useremail', email);
     return signInWithEmailAndPassword(this.auth, email, password)
   }
   userObserver() {
     const usuario = this.auth.currentUser;
     return usuario;
   }
-  cerrarSesion() {
+  /*cerrarSesion() {
     return signOut(this.auth);
-  }
+  }*/
   signUp(objeto: any) {
     let email = objeto["email"]
     let password = objeto["password"]
@@ -54,8 +55,10 @@ export class FirebaseService {
   async getPersonaActiva() {
     const user = await this.userObserver();
     if (user != null) {
+      console.log(user);
       return await this.getPersona(user.uid);
     }
+    console.log('Error');
     return null;
   }
   
@@ -65,7 +68,7 @@ export class FirebaseService {
     const user = await this.getPersonaActiva();
     if (user && userObserver) {
       try {
-        const fileUrl = await this.uploadImage(file);
+        const fileUrl = await this.uploadFile(file, true);
         post.userId = userObserver.uid;
         post.autor = user['firstName'] + ' ' + user['lastName'];
         post.document = fileUrl;
@@ -82,11 +85,12 @@ export class FirebaseService {
     }
   }
 
-  uploadImage(file: any): Promise<string> {
+  uploadFile(file: any, isFile: boolean): Promise<string> {
     return new Promise((resolve, reject) => {
       console.log(file);
-      
-      const storageRef = ref(this.storage, `files/${new Date().getTime() + file.name}`);
+
+      const fileName = isFile ? `files/${new Date().getTime() + file.name}` : 'images/'+localStorage.getItem('useruid');
+      const storageRef = ref(this.storage, fileName);
       
       uploadBytes(storageRef, file)
         .then(() => {
@@ -154,6 +158,30 @@ export class FirebaseService {
           }));
         })
       );
+  }
+
+  getUserInfo() {
+    const currentUser = localStorage.getItem('useruid');
+    console.log('Current user', this.auth.currentUser);
+    const usuarioRef = doc(this.firestore, "usuarios", currentUser?? '');
+    console.log('usuarioRef', usuarioRef);
+  
+    return new Promise<any>((resolve, reject) => {
+      getDoc(usuarioRef)
+        .then((docSnap) => {
+          if (docSnap.exists()) {
+            const userInfo = docSnap.data();
+            userInfo['email'] = localStorage.getItem('useremail');
+            console.log('user', userInfo);
+            resolve(userInfo);
+          } else {
+            reject(new Error("El usuario no existe"));
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
 
   getPostByUser(userId: string): Observable<Post[]> {
@@ -270,24 +298,32 @@ export class FirebaseService {
     }
   }
   
-
-  async getUserProfile() {
-    let user: any = {};
-    
-    const userInfo = await this.getPersonaActiva();
-    console.log(userInfo);
-    
-    if (userInfo) {
-      user.fullname = userInfo['firstName'] + ' ' + userInfo['lastName'];
-      user.profilePicture = userInfo['photoUrl'];
-      user.dateOfBirth = userInfo['birthdate'];
+  async updateUserBiography(biography: string) {
+    const userRef = doc(this.firestore, 'usuarios', localStorage.getItem('useruid')?? '');
+    const userSnapshot = await getDoc(userRef);
+    if (userSnapshot.exists()) {
+      const user = userSnapshot.data();
+      user['biography'] = biography;
+      await setDoc(userRef, user, { merge: true });
+    } else {
+      throw new Error('El usuario no existe');
     }
-    
-    user.biography = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices augue tortor. Nulla efficitur hendrerit porttitor. Quisque at tortor sed risus dapibus ullamcorper. Donec a sodales felis, finibus ullamcorper eros. Etiam at nisi placerat, ultrices eros a, condimentum nunc. Aliquam faucibus mi id sapien scelerisque egestas. Nulla auctor dolor in viverra pellentesque. Phasellus pulvinar egestas urna in feugiat. Proin semper sed est at semper. Suspendisse quis venenatis risus. Morbi posuere porttitor elit ac porta. Nullam a congue mi, vel molestie orci. Mauris eget interdum justo. Praesent a lacus sit amet urna sodales malesuada.';
+  }
+
+  async saveProfilePicture(file: any) {
+    const userObserver = this.userObserver();
+    const user = await this.getPersonaActiva();
   
-    const posts = await this.getPosts();
-    user.posts = posts;
-  
-    return user;
+    if (user && userObserver) {
+      try {
+        const fileUrl = await this.uploadFile(file, false);
+        const userRef = doc(this.firestore, 'usuarios', userObserver.uid);
+        await setDoc(userRef, { profilePicture: fileUrl }, { merge: true });
+      } catch (error) {
+        throw new Error('Error al guardar la foto de perfil: ' + error);
+      }
+    } else {
+      throw new Error('No se pudo obtener el usuario activo.');
+    }
   }
 }
