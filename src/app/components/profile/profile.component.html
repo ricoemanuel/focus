@@ -4,7 +4,10 @@
   <div class="profile-info">
     <div class="profile-picture">
       <img src="{{ user.profilePicture }}" alt="Foto de perfil" (click)="openFilePicker()">
-      <button (click)="openFilePicker()">Cambiar foto de perfil</button>
+      <div class="profile-picture">
+        <input for="profile-image" type="file" class="file-input"  (change)="onFileSelected($event)" accept="image/*">
+        <label for="profile-image" class="file-label">Cambiar</label>
+      </div>
     </div>
     <div class="profile-details">
       <h2>{{ user.fullname}}</h2>

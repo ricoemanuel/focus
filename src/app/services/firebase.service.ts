@@ -318,7 +318,7 @@ export class FirebaseService {
       try {
         const fileUrl = await this.uploadFile(file, false);
         const userRef = doc(this.firestore, 'usuarios', userObserver.uid);
-        await setDoc(userRef, { profilePicture: fileUrl }, { merge: true });
+        await setDoc(userRef, { photoUrl: fileUrl }, { merge: true });
       } catch (error) {
         throw new Error('Error al guardar la foto de perfil: ' + error);
       }

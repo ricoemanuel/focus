@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Post } from '../post/post.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class ProfileComponent implements OnInit{
   showForm = false;
   editedBiography = '';
 
-  constructor(private firebaseService: FirebaseService, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private firebaseService: FirebaseService, private router: Router) {}
 
   ngOnInit() {
     this.loadUserInfo();
@@ -30,7 +31,7 @@ export class ProfileComponent implements OnInit{
         const fechaEnMilisegundos = userInfo['birthdate'].seconds * 1000;
         const fecha = new Date(fechaEnMilisegundos);
         this.user = {
-          fullname: userInfo['firstName'] + ' ' + userInfo['firstName'],
+          fullname: userInfo['firstName'] + ' ' + userInfo['lastName'],
           email: userInfo['email'],
           profilePicture: userInfo['photoUrl'],
           dateOfBirth: fecha.toLocaleDateString(),
@@ -56,9 +57,11 @@ export class ProfileComponent implements OnInit{
   
   selectedFile: File | undefined;
 
-  onFileSelected(files: FileList | null) {
-    if (files && files.length > 0) {
-      this.selectedFile = files[0];
+  onFileSelected(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      this.selectedFile = inputElement.files[0];
+      this.openFilePicker();
     }
   }
   
@@ -67,6 +70,7 @@ export class ProfileComponent implements OnInit{
       this.firebaseService.saveProfilePicture(this.selectedFile)
         .then(() => {
           console.log('Foto de perfil guardada exitosamente');
+          window.location.reload();
         })
         .catch(error => {
           console.error('Error al guardar la foto de perfil:', error);
